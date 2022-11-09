@@ -83,6 +83,14 @@ void movepeca(string t[4][4], string peca, string pos, string *lTb, string *j1, 
         if((vPeca - vPos == 5 && linePeca - linePos == 1) || (vPeca - vPos == 3 && linePeca - linePos == 1)) {
             t[linePeca][colPeca] = lTb[vPeca-1];
             t[linePos][colPos] = p;
+        } else if(vPeca - vPos == 10 && linePeca - linePos == 2) {
+            t[linePeca][linePeca] = lTb[vPeca-1];
+            t[linePos][colPos] = p;
+            t[linePeca-1][colPeca-1] = lTb[vPeca-6];
+        } else if(vPeca - vPos == 6 && linePeca - linePos == 2) {
+            t[linePeca][colPeca] = lTb[vPeca-1];
+            t[linePos][colPos] = p;
+            t[linePeca-1][linePeca+1] = lTb[vPeca];
         }
     }
 }
