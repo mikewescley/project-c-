@@ -117,7 +117,7 @@ void movepeca(string t[4][4], string peca, string pos, string *lTb, string *j1, 
             if(t[linePeca-1][colPeca+1] == pos || t[linePeca-1][colPeca-1] == pos) {
                 t[linePeca][colPeca] = lTb[vPeca-1];
                 t[linePos][colPos] = peca;
-            } else if(vPeca - vPos == 10 && linePeca - linePos == 2) {
+            } else if(t[linePeca-2][colPeca-2] == pos) {
                 for(int i = 0; i < 4; i++) {
                     if(t[linePeca-1][colPeca-1] == j2[i]) {
                         t[linePeca][linePeca] = lTb[vPeca-1];
@@ -125,7 +125,7 @@ void movepeca(string t[4][4], string peca, string pos, string *lTb, string *j1, 
                         t[linePeca-1][colPeca-1] = lTb[vPeca-6];       
                     }
                 }
-            } else if(vPeca - vPos == 6 && linePeca - linePos == 2) {
+            } else if(t[linePeca-2][colPeca+2] == pos) {
                 for(int i = 0; i < 4; i++) {
                     if(t[linePeca-1][linePeca+1] == j2[i]) {
                         t[linePeca][colPeca] = lTb[vPeca-1];
@@ -135,18 +135,18 @@ void movepeca(string t[4][4], string peca, string pos, string *lTb, string *j1, 
                 }
             }
         } else {
-            if((vPos - vPeca == 5 && linePos - linePeca == 1) || (vPos - vPeca == 3 && linePos - linePeca ==1)) {
+            if(t[linePeca+1][colPeca+1] == pos || t[linePeca+1][colPeca-1] == pos) {
                 t[linePeca][colPeca] = lTb[vPeca-1];
                 t[linePos][colPos] = peca; 
-            } else if(vPos - vPeca == 10 && linePos - linePeca == 2) {
+            } else if(t[linePeca+2][colPeca+2] == pos) {
                 for(int i = 0; i < 4; i++) {
                     if(t[linePeca+1][colPeca+1] == j1[i]) {
-                        t[linePeca][colPos] = lTb[vPeca-1];
+                        t[linePeca][colPeca] = lTb[vPeca-1];
                         t[linePos][colPos] = peca;
                         t[linePeca+1][colPeca+1] = lTb[vPeca+4];       
                     }
                 }
-            } else if(vPos - vPeca == 6 && linePos - linePeca == 2) {
+            } else if(t[linePeca+2][colPeca-2] == pos) {
                 for(int i = 0; i < 4; i++) {
                     if(t[linePeca+1][linePeca-1] == j1[i]) {
                         t[linePeca][colPeca] = lTb[vPeca-1];
