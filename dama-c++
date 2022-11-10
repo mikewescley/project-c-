@@ -148,10 +148,10 @@ void movepeca(string t[4][4], string peca, string pos, string *lTb, string *j1, 
                 }
             } else if(t[linePeca+2][colPeca-2] == pos) {
                 for(int i = 0; i < 4; i++) {
-                    if(t[linePeca+1][linePeca-1] == j1[i]) {
+                    if(t[linePeca+1][colPeca-1] == j1[i]) {
                         t[linePeca][colPeca] = lTb[vPeca-1];
                         t[linePos][colPos] = peca;
-                        t[linePeca+1][linePeca-1] = lTb[vPeca+2];
+                        t[linePeca+1][colPeca-1] = lTb[vPeca+2];
                     }
                 }
             }
