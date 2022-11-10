@@ -3,6 +3,7 @@
 using namespace std;
 
 void movepeca(string[4][4], string, string, string*, string*, string*, bool);
+void verificaVitoria(string[4][4], string*, string*, bool*);
 
 int main() {
     string tabuleiro[4][4];
@@ -12,6 +13,7 @@ int main() {
     string pos, peca;
     bool jogo = true;
     bool vezJogador = true;
+    bool vitoria = false;
     
     tabuleiro[0][0] = j2[0];
     tabuleiro[0][1] = j2[1];
@@ -49,13 +51,18 @@ int main() {
         cout << "Para qual posição você deseja mover a peça? ";
         cin >> pos;
         movepeca(tabuleiro, peca, pos, letrasTb, j1, j2, vezJogador);
+        verificaVitoria(tabuleiro, j1, j2, &vitoria);
+        if() {
+            
+        }
     }
     
     return 0;
 }
 
-void movepeca(string t[4][4], string peca, string pos, string *lTb, string *j1, string *j2, bool v) {
+void movepeca(string t[4][4], string peca, string pos, string *lTb, string *j1, string *j2, bool vJ) {
     int vPeca=1, vPos=1, linePeca, colPeca, linePos, colPos;
+    bool confirm = true;
     
     for(int l = 0; l < 4; l++) {
         for(int c = 0; c < 4; c++) {
@@ -79,20 +86,71 @@ void movepeca(string t[4][4], string peca, string pos, string *lTb, string *j1, 
         }
     }
     
-    if(v) {
-        if((vPeca - vPos == 5 && linePeca - linePos == 1) || (vPeca - vPos == 3 && linePeca - linePos == 1)) {
-            t[linePeca][colPeca] = lTb[vPeca-1];
-            t[linePos][colPos] = p;
-        } else if(vPeca - vPos == 10 && linePeca - linePos == 2) {
-            t[linePeca][linePeca] = lTb[vPeca-1];
-            t[linePos][colPos] = p;
-            t[linePeca-1][colPeca-1] = lTb[vPeca-6];
-        } else if(vPeca - vPos == 6 && linePeca - linePos == 2) {
-            t[linePeca][colPeca] = lTb[vPeca-1];
-            t[linePos][colPos] = p;
-            t[linePeca-1][linePeca+1] = lTb[vPeca-4];
+    for(int l = 0; l < 4; l++) {
+        for(int c = 0; c < 4; c++) {
+            for(int i = 0; i < 4; i++) {
+                if(j1[i] == pos) {
+                    confirm = false;
+                    break;
+                }
+                
+                if(j2[i] == pos) {
+                    confirm = false;
+                    break;
+                }
+            }
         }
-    } else {
-        if((vPos - vPeca == 5 && linePos - linePeca == 1) || ())
+    }
+    
+    if(confirm) {
+        if(vJ) {
+            if((vPeca - vPos == 5 && linePeca - linePos == 1) || (vPeca - vPos == 3 && linePeca - linePos == 1)) {
+                t[linePeca][colPeca] = lTb[vPeca-1];
+                t[linePos][colPos] = peca;
+            } else if(vPeca - vPos == 10 && linePeca - linePos == 2) {
+                t[linePeca][linePeca] = lTb[vPeca-1];
+                t[linePos][colPos] = peca;
+                t[linePeca-1][colPeca-1] = lTb[vPeca-6];
+            } else if(vPeca - vPos == 6 && linePeca - linePos == 2) {
+                t[linePeca][colPeca] = lTb[vPeca-1];
+                t[linePos][colPos] = peca;
+                t[linePeca-1][linePeca+1] = lTb[vPeca-4];
+            }
+        } else {
+            if((vPos - vPeca == 5 && linePos - linePeca == 1) || (vPos - vPeca == 3 && linePos - linePeca ==1)) {
+                t[linePeca][colPeca] = lTb[vPeca-1];
+                t[linePos][colPos] = peca; 
+            } else if(vPos - vPeca == 10 && linePos - linePeca == 2) {
+                t[linePeca][colPos] = lTb[vPeca-1];
+                t[linePos][colPos] = peca;
+                t[linePeca+1][colPeca+1] = lTb[vPeca+4];
+            } else if(vPos - vPeca == 6 && linePos - linePeca == 2) {
+                t[linePeca][colPeca] = lTb[vPeca-1];
+                t[linePos][colPos] = peca;
+                t[linePeca+1][linePeca-1] = lTb[vPeca+2];
+            }
+        }
+    }
+}
+
+void verificaVitoria(string t[4][4], string *j1, string *j2, bool* v) {
+    int v1=0, v2=0;
+    
+    for(int l = 0; l < 4; l++) {
+        for(int c = 0; c < 4; c++) {
+            for(int i = 0; i < 4; i++) {
+                if(t[l][c] == j1[i]) {
+                    v1++;
+                } 
+                
+                if(t[l][c] == j2[i]) {
+                    v2++;
+                }
+            }
+        }
+    }
+    
+    if(v1 == 0 || v2 == 0) {
+        *v = true;
     }
 }
