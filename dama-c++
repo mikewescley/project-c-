@@ -120,23 +120,23 @@ void movepeca(string t[4][4], string peca, string pos, string *lTb, string *j1, 
             } else if(t[linePeca-2][colPeca-2] == pos) {
                 for(int i = 0; i < 4; i++) {
                     if(t[linePeca-1][colPeca-1] == j2[i]) {
-                        t[linePeca][linePeca] = lTb[vPeca-1];
+                        t[linePeca][colPeca] = lTb[vPeca-1];
                         t[linePos][colPos] = peca;
                         t[linePeca-1][colPeca-1] = lTb[vPeca-6];       
                     }
                 }
             } else if(t[linePeca-2][colPeca+2] == pos) {
                 for(int i = 0; i < 4; i++) {
-                    if(t[linePeca-1][linePeca+1] == j2[i]) {
+                    if(t[linePeca-1][colPeca+1] == j2[i]) {
                         t[linePeca][colPeca] = lTb[vPeca-1];
                         t[linePos][colPos] = peca;
-                        t[linePeca-1][linePeca+1] = lTb[vPeca-4];       
+                        t[linePeca-1][colPeca+1] = lTb[vPeca-4];       
                     }
                 }
             }
         } else {
             if(t[linePeca+1][colPeca+1] == pos || t[linePeca+1][colPeca-1] == pos) {
-                t[linePeca][colPeca] = lTb[vPeca-1];
+                t[linePeca][colPeca] = lTb[vPeca-13];
                 t[linePos][colPos] = peca; 
             } else if(t[linePeca+2][colPeca+2] == pos) {
                 for(int i = 0; i < 4; i++) {
